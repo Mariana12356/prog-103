@@ -18,3 +18,23 @@ function takeSnapshot(){
 
 console.log('versão ml5:', ml5.version);
 classifier= ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/Y2jIhqkOL/model.json',modelLoaded);
+
+function check()
+  {
+    img = document.getElementById('selfie_image');
+    classifier.classify(img, gotResult);
+  }
+
+
+// A function to run when we get any errors and the results
+function gotResult(error, results) {
+  // Display error in the console
+  if (error) {
+    console.error(error);
+  } else {
+    // The results are in an array ordered by confidence.
+    console.log(results);
+    document.getElementById("result_object_name").innerHTML = results[0].label;
+    document.getElementById("result_object_accuracy").innerHTML = results[0].confidence.toFixed(3);
+  }
+}
